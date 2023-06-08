@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PodcastsSearchController: UITableViewController {
+class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     let cellID = "cellID"
     
@@ -15,10 +15,28 @@ class PodcastsSearchController: UITableViewController {
                                Podcast(name: "HK", artistName: "Hanife Korpeoglu")
     ]
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
+        setupTableView()
+    }
+    
+    //MARK: - setupTableView
+    fileprivate func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+    }
+    //MARK: - setupSearchBar
+    fileprivate func setupSearchBar() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.delegate = self
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
     }
     
     
