@@ -12,8 +12,8 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     let cellID = "cellID"
     
-    let dummyPodcats = [Podcast(name: "MCK", artistName: "Murat Ceyhun korpeoglu"),
-                               Podcast(name: "HK", artistName: "Hanife Korpeoglu")
+    var dummyPodcats = [Podcast(trackName: "MCK", artistName: "Murat Ceyhun korpeoglu"),
+                               Podcast(trackName: "HK", artistName: "Hanife Korpeoglu")
     ]
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -45,10 +45,26 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
                 print("ERROR: \(error)")
                 return
             }
-            
             guard let data = dataResponse.data else {return}
             let dummyString = String(data: data, encoding: .utf8)
             print(dummyString)
+            
+            
+            do {
+                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
+                print(searchResult.resultCount)
+                searchResult.results.forEach{print($0.artistName, "|", $0.trackName)}
+                self.dummyPodcats = searchResult.results
+                self.tableView.reloadData()
+            } catch let decodeErr {
+                print("ERROR: ", decodeErr)
+            }
+            
+            
+            struct SearchResult: Decodable {
+                let resultCount: Int
+                let results: [Podcast]
+            }
         }
 
     }
@@ -63,7 +79,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let podcast = dummyPodcats[indexPath.item]
         cell.textLabel?.numberOfLines = -1
-        cell.textLabel?.text = "\(podcast.name)\n\(podcast.artistName)"
+        cell.textLabel?.text = "\(podcast.trackName)\n\(podcast.artistName)"
         cell.imageView?.image = UIImage(named: "appicon")
 
         return cell
