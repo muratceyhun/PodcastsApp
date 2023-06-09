@@ -38,35 +38,31 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        let url = "https://itunes.apple.com/search?term=\(searchText))"
+        let url = "https://itunes.apple.com/search"
+        let parameters = ["term": searchText]
         
-        AF.request(url).responseData { dataResponse in
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseData { dataResponse in
             if let error = dataResponse.error {
                 print("ERROR: \(error)")
                 return
             }
-            guard let data = dataResponse.data else {return}
-            let dummyString = String(data: data, encoding: .utf8)
-            print(dummyString)
             
+            guard let data = dataResponse.data else {return}
             
             do {
                 let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                print(searchResult.resultCount)
-                searchResult.results.forEach{print($0.artistName, "|", $0.trackName)}
                 self.dummyPodcats = searchResult.results
                 self.tableView.reloadData()
             } catch let decodeErr {
                 print("ERROR: ", decodeErr)
             }
-            
-            
+        
             struct SearchResult: Decodable {
                 let resultCount: Int
                 let results: [Podcast]
             }
         }
-
+ 
     }
     
     
@@ -79,7 +75,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let podcast = dummyPodcats[indexPath.item]
         cell.textLabel?.numberOfLines = -1
-        cell.textLabel?.text = "\(podcast.trackName)\n\(podcast.artistName)"
+        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
         cell.imageView?.image = UIImage(named: "appicon")
 
         return cell
