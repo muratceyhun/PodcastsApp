@@ -19,6 +19,7 @@
 		4320ED422A33A5950053A9E9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED412A33A5950053A9E9 /* APIService.swift */; };
 		4320ED452A35ECCA0053A9E9 /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4320ED442A35ECCA0053A9E9 /* PodcastCell.xib */; };
 		4320ED492A35F6690053A9E9 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED482A35F6690053A9E9 /* PodcastCell.swift */; };
+		4320ED4C2A3604510053A9E9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4320ED4B2A3604510053A9E9 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4320ED4C2A3604510053A9E9 /* SDWebImage in Frameworks */,
 				4320ED3F2A324D7E0053A9E9 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +136,7 @@
 			name = PodcastsApp;
 			packageProductDependencies = (
 				4320ED3E2A324D7E0053A9E9 /* Alamofire */,
+				4320ED4B2A3604510053A9E9 /* SDWebImage */,
 			);
 			productName = PodcastsApp;
 			productReference = 431613442A2F945B00457E1E /* PodcastsApp.app */;
@@ -165,6 +168,7 @@
 			mainGroup = 4316133B2A2F945B00457E1E;
 			packageReferences = (
 				4320ED3D2A324D7E0053A9E9 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4320ED4A2A3604510053A9E9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 431613452A2F945B00457E1E /* Products */;
 			projectDirPath = "";
@@ -418,6 +422,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4320ED4A2A3604510053A9E9 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -425,6 +437,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4320ED3D2A324D7E0053A9E9 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		4320ED4B2A3604510053A9E9 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4320ED4A2A3604510053A9E9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

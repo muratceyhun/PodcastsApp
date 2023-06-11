@@ -12,9 +12,7 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     let cellID = "cellID"
     
-    var podcasts = [Podcast(trackName: "MCK", artistName: "Murat Ceyhun korpeoglu"),
-                               Podcast(trackName: "HK", artistName: "Hanife Korpeoglu")
-    ]
+    var podcasts = [Podcast]()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -49,6 +47,10 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return podcasts.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
