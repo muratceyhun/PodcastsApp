@@ -27,7 +27,8 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     //MARK: - setupTableView
     fileprivate func setupTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: "PodcastCell", bundle: nil), forCellReuseIdentifier: cellID)
     }
     //MARK: - setupSearchBar
     fileprivate func setupSearchBar() {
@@ -52,12 +53,19 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PodcastCell
         let podcast = podcasts[indexPath.item]
-        cell.textLabel?.numberOfLines = -1
-        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
-        cell.imageView?.image = UIImage(named: "appicon")
+        cell.podcast = podcast
+        
+//        cell.textLabel?.numberOfLines = -1
+//        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
+//        cell.imageView?.image = UIImage(named: "appicon")
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 132
     }
 }
