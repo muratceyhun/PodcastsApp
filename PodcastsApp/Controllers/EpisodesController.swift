@@ -25,7 +25,8 @@ class EpisodeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+//        tableView.register(EpisodeCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: "EpisodeCell", bundle: nil), forCellReuseIdentifier: cellID)
         
         episodes = [Episode]()
     }
@@ -75,10 +76,9 @@ class EpisodeController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! EpisodeCell
         let episode = episodes[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = episode.title + "\n" + episode.pubDate.description
+        cell.episode = episode
         return cell
     }
     
