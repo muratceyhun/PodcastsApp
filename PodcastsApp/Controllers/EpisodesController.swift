@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FeedKit
 
 class EpisodeController: UITableViewController {
     
@@ -22,7 +23,7 @@ class EpisodeController: UITableViewController {
     var podcasts: Podcast? {
         didSet {
             navigationItem.title = podcasts?.trackName
-        }
+            fetchEpisodes()        }
     }
     
     override func viewDidLoad() {
@@ -33,6 +34,42 @@ class EpisodeController: UITableViewController {
                      Episode(title: "Second Episode"),
                      Episode(title: "Third Episode")
         ]
+    }
+    
+    fileprivate func fetchEpisodes() {
+        print("Looking for episodes at feed url", podcasts?.feedUrl ?? "")
+        guard let feedURL = podcasts?.feedUrl else {return}
+        guard let url = URL(string: feedURL) else {return}
+        let parser = FeedParser(URL: url)
+        parser.parseAsync { result in
+            print("Successfully parse feed:")
+            
+            switch result {
+            case .success(let feed):
+                
+                
+                switch feed {
+                case let .rss(feed):
+                    var episodes = [Episode]()
+                    feed.items?.forEach({ feedItem in
+                        let episode = Episode(title: feedItem.title ?? "")
+                        episodes.append(episode)
+                        self.episodes = episodes
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    })
+                    break
+                case .json(_):
+                    break
+                default:
+                    print("Found a feed")
+                }
+                
+            case .failure(let error):
+                print("Failed to parse:", error)
+            }
+        }
     }
     
     
