@@ -21,6 +21,7 @@
 		4320ED492A35F6690053A9E9 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED482A35F6690053A9E9 /* PodcastCell.swift */; };
 		4320ED4C2A3604510053A9E9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4320ED4B2A3604510053A9E9 /* SDWebImage */; };
 		4320ED4E2A3662060053A9E9 /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED4D2A3662060053A9E9 /* EpisodesController.swift */; };
+		4320ED512A38EBF80053A9E9 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4320ED502A38EBF80053A9E9 /* FeedKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4320ED512A38EBF80053A9E9 /* FeedKit in Frameworks */,
 				4320ED4C2A3604510053A9E9 /* SDWebImage in Frameworks */,
 				4320ED3F2A324D7E0053A9E9 /* Alamofire in Frameworks */,
 			);
@@ -140,6 +142,7 @@
 			packageProductDependencies = (
 				4320ED3E2A324D7E0053A9E9 /* Alamofire */,
 				4320ED4B2A3604510053A9E9 /* SDWebImage */,
+				4320ED502A38EBF80053A9E9 /* FeedKit */,
 			);
 			productName = PodcastsApp;
 			productReference = 431613442A2F945B00457E1E /* PodcastsApp.app */;
@@ -172,6 +175,7 @@
 			packageReferences = (
 				4320ED3D2A324D7E0053A9E9 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4320ED4A2A3604510053A9E9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				4320ED4F2A38EBF80053A9E9 /* XCRemoteSwiftPackageReference "FeedKit" */,
 			);
 			productRefGroup = 431613452A2F945B00457E1E /* Products */;
 			projectDirPath = "";
@@ -434,6 +438,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		4320ED4F2A38EBF80053A9E9 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -446,6 +458,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4320ED4A2A3604510053A9E9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		4320ED502A38EBF80053A9E9 /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4320ED4F2A38EBF80053A9E9 /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
