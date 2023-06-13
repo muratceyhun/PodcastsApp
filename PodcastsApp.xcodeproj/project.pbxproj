@@ -22,6 +22,7 @@
 		4320ED4C2A3604510053A9E9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4320ED4B2A3604510053A9E9 /* SDWebImage */; };
 		4320ED4E2A3662060053A9E9 /* EpisodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED4D2A3662060053A9E9 /* EpisodesController.swift */; };
 		4320ED512A38EBF80053A9E9 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4320ED502A38EBF80053A9E9 /* FeedKit */; };
+		4320ED532A390BA40053A9E9 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED522A390BA40053A9E9 /* Episode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		4320ED442A35ECCA0053A9E9 /* PodcastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastCell.xib; sourceTree = "<group>"; };
 		4320ED482A35F6690053A9E9 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		4320ED4D2A3662060053A9E9 /* EpisodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesController.swift; sourceTree = "<group>"; };
+		4320ED522A390BA40053A9E9 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				4320ED3B2A3226BB0053A9E9 /* Podcast.swift */,
+				4320ED522A390BA40053A9E9 /* Episode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				4316134C2A2F945B00457E1E /* ViewController.swift in Sources */,
 				4320ED422A33A5950053A9E9 /* APIService.swift in Sources */,
 				4320ED492A35F6690053A9E9 /* PodcastCell.swift in Sources */,
+				4320ED532A390BA40053A9E9 /* Episode.swift in Sources */,
 				431613482A2F945B00457E1E /* AppDelegate.swift in Sources */,
 				4320ED3C2A3226BB0053A9E9 /* Podcast.swift in Sources */,
 				4316135C2A2FC55100457E1E /* MainTabBarController.swift in Sources */,

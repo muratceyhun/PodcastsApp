@@ -12,10 +12,7 @@ class EpisodeController: UITableViewController {
     
     
     var episodes = [Episode]()
-    
-    struct Episode {
-        let title: String?
-    }
+
     
     
     fileprivate let cellID = "cellID"
@@ -30,10 +27,7 @@ class EpisodeController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         
-        episodes = [ Episode(title: "First Episode"),
-                     Episode(title: "Second Episode"),
-                     Episode(title: "Third Episode")
-        ]
+        episodes = [Episode]()
     }
     
     fileprivate func fetchEpisodes() {
@@ -52,7 +46,7 @@ class EpisodeController: UITableViewController {
                 case let .rss(feed):
                     var episodes = [Episode]()
                     feed.items?.forEach({ feedItem in
-                        let episode = Episode(title: feedItem.title ?? "")
+                        let episode = Episode(feedItem: feedItem)
                         episodes.append(episode)
                         self.episodes = episodes
                         DispatchQueue.main.async {
@@ -83,7 +77,8 @@ class EpisodeController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let episode = episodes[indexPath.row]
-        cell.textLabel?.text = episode.title
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = episode.title + "\n" + episode.pubDate.description
         return cell
     }
     
@@ -91,7 +86,7 @@ class EpisodeController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 120
-//    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
 }
