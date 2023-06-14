@@ -6,16 +6,20 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EpisodeCell: UITableViewCell {
     
     var episode: Episode! {
         didSet {
-            titleLabel.text = episode.title 
+            let url = URL(string: episode.imageUrl ?? "")
+            episodeImageView.sd_setImage(with:url)
+            titleLabel.text = episode.title
             descriptionLabel.text = episode.description
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd, yyyy"
             pubDateLabel.text = dateFormatter.string(from: episode.pubDate)
+            
         }
     }
 

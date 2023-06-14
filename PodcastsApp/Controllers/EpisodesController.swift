@@ -12,7 +12,7 @@ class EpisodeController: UITableViewController {
     
     
     var episodes = [Episode]()
-
+    
     
     
     fileprivate let cellID = "cellID"
@@ -25,7 +25,7 @@ class EpisodeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.register(EpisodeCell.self, forCellReuseIdentifier: cellID)
+        //        tableView.register(EpisodeCell.self, forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: "EpisodeCell", bundle: nil), forCellReuseIdentifier: cellID)
         
         episodes = [Episode]()
@@ -45,15 +45,19 @@ class EpisodeController: UITableViewController {
                 
                 switch feed {
                 case let .rss(feed):
+                    
+                    let imageUrl = feed.iTunes?.iTunesImage?.attributes?.href
                     var episodes = [Episode]()
+                    
                     feed.items?.forEach({ feedItem in
-                        let episode = Episode(feedItem: feedItem)
+                        var episode = Episode(feedItem: feedItem)
+                            episode.imageUrl = imageUrl
                         episodes.append(episode)
-                        self.episodes = episodes
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
                     })
+                    self.episodes = episodes
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                     break
                 case .json(_):
                     break
