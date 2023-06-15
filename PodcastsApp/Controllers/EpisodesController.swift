@@ -33,43 +33,15 @@ class EpisodeController: UITableViewController {
     
     fileprivate func fetchEpisodes() {
         print("Looking for episodes at feed url", podcasts?.feedUrl ?? "")
-        guard let feedURL = podcasts?.feedUrl else {return}
-        guard let url = URL(string: feedURL) else {return}
-        let parser = FeedParser(URL: url)
-        parser.parseAsync { result in
-            print("Successfully parse feed:")
-            
-            switch result {
-            case .success(let feed):
-                
-                
-                switch feed {
-                case let .rss(feed):
-                    
-                    let imageUrl = feed.iTunes?.iTunesImage?.attributes?.href
-                    var episodes = [Episode]()
-                    
-                    feed.items?.forEach({ feedItem in
-                        var episode = Episode(feedItem: feedItem)
-                            episode.imageUrl = imageUrl
-                        episodes.append(episode)
-                    })
-                    self.episodes = episodes
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    break
-                case .json(_):
-                    break
-                default:
-                    print("Found a feed")
-                }
-                
-            case .failure(let error):
-                print("Failed to parse:", error)
+        guard let feedUrl = podcasts?.feedUrl else {return}
+        APIService.shared.fetchEpisodes(feedUrl: feedUrl) { episodes in
+            self.episodes = episodes
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
-    }
+
+            }
     
     
     //MARK: - TableViewSetup

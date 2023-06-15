@@ -12,7 +12,7 @@ class EpisodeCell: UITableViewCell {
     
     var episode: Episode! {
         didSet {
-            let url = URL(string: episode.imageUrl ?? "")
+            let url = URL(string: episode.imageUrl?.toSecureHTTPS() ?? "")
             episodeImageView.sd_setImage(with:url)
             titleLabel.text = episode.title
             descriptionLabel.text = episode.description
