@@ -60,6 +60,21 @@ class EpisodeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let window = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+        
+//        let window = UIApplication.shared.keyWindow
+        
+        let playerDetailView = Bundle.main.loadNibNamed("PlayerDetailsView", owner: self)?.first as! PlayerDetailsView
+        let episode = self.episodes[indexPath.row]
+        playerDetailView.frame = self.view.frame
+        playerDetailView.episode = episode
+        window?.addSubview(playerDetailView)
+         
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -27,6 +27,8 @@
 		4320ED572A3910BF0053A9E9 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */; };
 		43D2C3802A3A6F3500D75204 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C37F2A3A6F3500D75204 /* String.swift */; };
 		43D2C3822A3B5F0400D75204 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C3812A3B5F0400D75204 /* RSSFeed.swift */; };
+		43D2C3842A3CD98F00D75204 /* PlayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D2C3832A3CD98F00D75204 /* PlayerDetailsView.xib */; };
+		43D2C3862A3CDC8900D75204 /* PlayerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C3852A3CDC8900D75204 /* PlayerDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
 		43D2C37F2A3A6F3500D75204 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		43D2C3812A3B5F0400D75204 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		43D2C3832A3CD98F00D75204 /* PlayerDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailsView.xib; sourceTree = "<group>"; };
+		43D2C3852A3CDC8900D75204 /* PlayerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				4320ED482A35F6690053A9E9 /* PodcastCell.swift */,
 				4320ED542A3910BF0053A9E9 /* EpisodeCell.swift */,
 				4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */,
+				43D2C3832A3CD98F00D75204 /* PlayerDetailsView.xib */,
+				43D2C3852A3CDC8900D75204 /* PlayerDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				431613542A2F945C00457E1E /* LaunchScreen.storyboard in Resources */,
+				43D2C3842A3CD98F00D75204 /* PlayerDetailsView.xib in Resources */,
 				4320ED572A3910BF0053A9E9 /* EpisodeCell.xib in Resources */,
 				431613512A2F945C00457E1E /* Assets.xcassets in Resources */,
 				4320ED452A35ECCA0053A9E9 /* PodcastCell.xib in Resources */,
@@ -234,6 +241,7 @@
 				4320ED562A3910BF0053A9E9 /* EpisodeCell.swift in Sources */,
 				4320ED532A390BA40053A9E9 /* Episode.swift in Sources */,
 				431613482A2F945B00457E1E /* AppDelegate.swift in Sources */,
+				43D2C3862A3CDC8900D75204 /* PlayerDetailsView.swift in Sources */,
 				43D2C3822A3B5F0400D75204 /* RSSFeed.swift in Sources */,
 				43D2C3802A3A6F3500D75204 /* String.swift in Sources */,
 				4320ED3C2A3226BB0053A9E9 /* Podcast.swift in Sources */,
