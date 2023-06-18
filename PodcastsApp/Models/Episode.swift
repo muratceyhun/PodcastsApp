@@ -15,8 +15,10 @@ struct Episode {
     let description: String
     var imageUrl: String?
     let author: String?
+    let streamUrl: String?
     
     init(feedItem: RSSFeedItem) {
+        self.streamUrl = feedItem.enclosure?.attributes?.url ?? ""
         self.title = feedItem.title ?? ""
         self.pubDate = feedItem.pubDate ?? Date()
         self.description = feedItem.description ?? ""
