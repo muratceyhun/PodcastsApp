@@ -34,10 +34,10 @@
                                 <constraint firstAttribute="width" secondItem="8Qr-Kl-raj" secondAttribute="height" id="prc-21-okC"/>
                             </constraints>
                         </imageView>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="uOC-Ro-2bD">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-Ia-aSi">
                             <rect key="frame" x="-2" y="434" width="386" height="37"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="36" id="uKA-QC-GCu"/>
+                                <constraint firstAttribute="height" constant="36" id="AmF-Cw-tks"/>
                             </constraints>
                         </slider>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dIS-BY-f5R">
@@ -144,6 +144,9 @@
             </constraints>
             <connections>
                 <outlet property="authorLabel" destination="Zk9-Mg-Cvf" id="Noa-rf-K9o"/>
+                <outlet property="currentTimeLabel" destination="ZKM-Vh-5lt" id="n6C-8Z-Dtq"/>
+                <outlet property="currentTimeSlider" destination="wkM-Ia-aSi" id="gUR-3o-MD7"/>
+                <outlet property="durationLabel" destination="chq-Fp-IVB" id="Hkr-5P-ETl"/>
                 <outlet property="episodeImageView" destination="8Qr-Kl-raj" id="bYO-Yh-idC"/>
                 <outlet property="playPauseButton" destination="LhA-PB-aJY" id="NYE-T8-wyA"/>
                 <outlet property="titleLabel" destination="yHD-Hv-ocD" id="G32-Rc-sWk"/>

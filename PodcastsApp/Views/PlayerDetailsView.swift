@@ -36,9 +36,26 @@ class PlayerDetailsView: UIView {
     }()
     
     
+    fileprivate func observePlayerCurrentTime() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
+            
+            let totalSeconds = Int(CMTimeGetSeconds(time))
+            print("Total Seconds", totalSeconds)
+            let seconds = totalSeconds % 60
+            let minutes = totalSeconds / 60
+            let timeFormatString = String(format: "%02d:%02d", minutes, seconds)
+            self.currentTimeLabel.text = timeFormatString
+        }
+    }
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        observePlayerCurrentTime()
         
         let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
@@ -54,6 +71,15 @@ class PlayerDetailsView: UIView {
     
     
     //MARK: - IB Actions and Outlets
+    
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    
+    @IBOutlet weak var currentTimeSlider: UISlider!
+    
+    
     
     @IBAction func handleDismiss(_ sender: Any) {
         removeFromSuperview()
