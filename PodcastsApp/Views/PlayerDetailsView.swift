@@ -39,14 +39,21 @@ class PlayerDetailsView: UIView {
     fileprivate func observePlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
+         
+            self.currentTimeLabel.text = time.toDisplayString()
             
-            let totalSeconds = Int(CMTimeGetSeconds(time))
-            print("Total Seconds", totalSeconds)
-            let seconds = totalSeconds % 60
-            let minutes = totalSeconds / 60
-            let timeFormatString = String(format: "%02d:%02d", minutes, seconds)
-            self.currentTimeLabel.text = timeFormatString
+            let durationTime = self.player.currentItem?.duration
+            self.durationLabel.text = durationTime?.toDisplayString()
+            self.updateCurrentSlide()
         }
+    }
+    
+    fileprivate func updateCurrentSlide() {
+        let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
+        let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? .zero)
+        let percentage = currentTimeSeconds / durationSeconds
+        self.currentTimeSlider.value = Float(percentage)
+        
     }
     
     
@@ -83,6 +90,7 @@ class PlayerDetailsView: UIView {
     
     @IBAction func handleDismiss(_ sender: Any) {
         removeFromSuperview()
+        player.pause()
     }
     
     

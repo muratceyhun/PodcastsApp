@@ -25,6 +25,7 @@
 		4320ED532A390BA40053A9E9 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED522A390BA40053A9E9 /* Episode.swift */; };
 		4320ED562A3910BF0053A9E9 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED542A3910BF0053A9E9 /* EpisodeCell.swift */; };
 		4320ED572A3910BF0053A9E9 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */; };
+		4374EA062A424E5700EE22FB /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4374EA052A424E5700EE22FB /* CMTime.swift */; };
 		43D2C3802A3A6F3500D75204 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C37F2A3A6F3500D75204 /* String.swift */; };
 		43D2C3822A3B5F0400D75204 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C3812A3B5F0400D75204 /* RSSFeed.swift */; };
 		43D2C3842A3CD98F00D75204 /* PlayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D2C3832A3CD98F00D75204 /* PlayerDetailsView.xib */; };
@@ -49,6 +50,7 @@
 		4320ED522A390BA40053A9E9 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		4320ED542A3910BF0053A9E9 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
+		4374EA052A424E5700EE22FB /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		43D2C37F2A3A6F3500D75204 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		43D2C3812A3B5F0400D75204 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
 		43D2C3832A3CD98F00D75204 /* PlayerDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailsView.xib; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				43D2C37F2A3A6F3500D75204 /* String.swift */,
 				43D2C3812A3B5F0400D75204 /* RSSFeed.swift */,
+				4374EA052A424E5700EE22FB /* CMTime.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				4316135C2A2FC55100457E1E /* MainTabBarController.swift in Sources */,
 				4320ED392A3225220053A9E9 /* PodcastsSearchController.swift in Sources */,
 				4316134A2A2F945B00457E1E /* SceneDelegate.swift in Sources */,
+				4374EA062A424E5700EE22FB /* CMTime.swift in Sources */,
 				4320ED4E2A3662060053A9E9 /* EpisodesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
