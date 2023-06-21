@@ -35,13 +35,19 @@ class PodcastsSearchController: UITableViewController, UISearchBarDelegate {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
     }
-    
+    var timer: Timer?
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        APIService().fetchPodcasts(searchText: searchText) { podcasts in
-            self.podcasts = podcasts
-            self.tableView.reloadData()
-        }
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { timer in
+            APIService().fetchPodcasts(searchText: searchText) { podcasts in
+                self.podcasts = podcasts
+                self.tableView.reloadData()
+            }
+        })
+        
+      
  
     }
     

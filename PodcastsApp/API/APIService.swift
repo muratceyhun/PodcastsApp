@@ -18,33 +18,40 @@ class APIService {
     func fetchEpisodes(feedUrl: String, completionHandler: @escaping ([Episode]) -> ()) {
         let secureFeedUrl = feedUrl.contains("https") ? feedUrl : feedUrl.replacingOccurrences(of: "http", with: "https")
         guard let url = URL(string: secureFeedUrl) else {return}
-        let parser = FeedParser(URL: url)
-        parser.parseAsync { result in
-            print("Successfully parse feed:")
-            
-            switch result {
-            case .success(let feed):
+        
+        DispatchQueue.global().async {
+            print("Before parser")
+            let parser = FeedParser(URL: url)
+            print("After parser")
+            parser.parseAsync { result in
+                print("Successfully parse feed:")
                 
-                switch feed {
-                case let .rss(feed):
+                switch result {
+                case .success(let feed):
                     
-                    let episodes = feed.toEpisode()
-                    completionHandler(episodes)
-//                    self.episodes = feed.toEpisode()
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                    }
-                    break
-                case .json(_):
-                    break
-                default:
-                    print("Found a feed")
+                    switch feed {
+                    case let .rss(feed):
+                        
+                        let episodes = feed.toEpisode()
+                        completionHandler(episodes)
+    //                    self.episodes = feed.toEpisode()
+    //                    DispatchQueue.main.async {
+    //                        self.tableView.reloadData()
+    //                    }
+                        break
+                    case .json(_):
+                        break
+                    default:
+                        print("Found a feed")
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to parse:", error)
                 }
-                
-            case .failure(let error):
-                print("Failed to parse:", error)
             }
         }
+        
+        
 
     }
     
