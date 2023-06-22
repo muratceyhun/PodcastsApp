@@ -64,55 +64,64 @@
                             </constraints>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHD-Hv-ocD">
-                            <rect key="frame" x="0.0" y="502" width="382" height="0.0"/>
+                            <rect key="frame" x="0.0" y="501.99999999999994" width="382" height="20.333333333333314"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk9-Mg-Cvf">
-                            <rect key="frame" x="0.0" y="506" width="382" height="0.0"/>
+                            <rect key="frame" x="0.0" y="526.33333333333337" width="382" height="20.333333333333371"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <color key="textColor" red="0.51372551919999998" green="0.2588235438" blue="0.64705884459999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="hyE-bM-u44">
-                            <rect key="frame" x="0.0" y="510" width="382" height="265"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="hyE-bM-u44">
+                            <rect key="frame" x="0.0" y="550.66666666666663" width="382" height="224.33333333333337"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCv-9Z-uBf">
-                                    <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="265"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCv-9Z-uBf">
+                                    <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="224.33333333333334"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCV-dL-Xvw">
-                                    <rect key="frame" x="54.666666666666671" y="0.0" width="53.666666666666671" height="265"/>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCV-dL-Xvw">
+                                    <rect key="frame" x="59.666666666666671" y="0.0" width="44" height="224.33333333333334"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="sx8-al-32Y"/>
+                                    </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="rewind15"/>
                                     <connections>
                                         <action selector="handleRewind:" destination="rwC-TZ-qwa" eventType="touchUpInside" id="oCY-vc-2QK"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXJ-vh-LDa">
-                                    <rect key="frame" x="109.33333333333336" y="0.0" width="53.666666666666671" height="265"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VXJ-vh-LDa">
+                                    <rect key="frame" x="109.99999999999999" y="0.0" width="53.333333333333329" height="224.33333333333334"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhA-PB-aJY">
-                                    <rect key="frame" x="164" y="0.0" width="54" height="265"/>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhA-PB-aJY">
+                                    <rect key="frame" x="164.33333333333334" y="0.0" width="54" height="224.33333333333334"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="54" id="0ID-4X-who"/>
+                                    </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="play" title=""/>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGE-Bv-DgX">
-                                    <rect key="frame" x="219" y="0.0" width="53.666666666666686" height="265"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eGE-Bv-DgX">
+                                    <rect key="frame" x="219.33333333333334" y="0.0" width="53.666666666666657" height="224.33333333333334"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdP-Uj-7GC">
-                                    <rect key="frame" x="273.66666666666669" y="0.0" width="53.666666666666686" height="265"/>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdP-Uj-7GC">
+                                    <rect key="frame" x="279" y="0.0" width="44" height="224.33333333333334"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="U9p-Eq-FiB"/>
+                                    </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="fastforward15"/>
                                     <connections>
                                         <action selector="handleFastForward:" destination="rwC-TZ-qwa" eventType="touchUpInside" id="0Ca-Rc-HEy"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBV-LN-2GT">
-                                    <rect key="frame" x="328.33333333333331" y="0.0" width="53.666666666666686" height="265"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBV-LN-2GT">
+                                    <rect key="frame" x="328.33333333333331" y="0.0" width="53.666666666666686" height="224.33333333333334"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                             </subviews>

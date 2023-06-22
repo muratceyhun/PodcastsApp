@@ -71,8 +71,11 @@ class PlayerDetailsView: UIView {
             print("EPİSODE STARTED PLAYING ")
             self?.enlargeEpisodeImageView()
         }
-        
-        
+    }
+    
+    
+    static func initFromNib() -> PlayerDetailsView {
+        Bundle.main.loadNibNamed("PlayerDetailsView", owner: self)?.first as! PlayerDetailsView
     }
     
     
