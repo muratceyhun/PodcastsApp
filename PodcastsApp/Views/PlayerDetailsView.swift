@@ -13,9 +13,13 @@ class PlayerDetailsView: UIView {
     var episode: Episode! {
         didSet{
             episodeImageView.sd_setImage(with: URL(string: episode.imageUrl ?? ""))
+            miniEpisodeImageView.sd_setImage(with: URL(string: episode.imageUrl ?? ""))
+            miniTitleLabel.text = episode.title
             titleLabel.text = episode.title
             authorLabel.text = episode.author
             playEpisode()
+            
+            
         }
     }
     
@@ -94,6 +98,40 @@ class PlayerDetailsView: UIView {
     
     
     //MARK: - IB Actions and Outlets
+    
+    
+    @IBOutlet weak var miniEpisodeImageView: UIImageView!
+    
+    
+    @IBOutlet weak var miniTitleLabel: UILabel!
+    
+    @IBOutlet weak var miniPlayPauseButton: UIButton! {
+        didSet {
+            miniPlayPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
+        }
+    }
+        
+    @IBOutlet weak var miniFastForwardButton: UIButton! {
+        didSet {
+            miniFastForwardButton.addTarget(self, action: #selector(miniFastForward), for: .touchUpInside)
+        }
+    }
+    
+    @objc func miniFastForward () {
+        seekToCurrentTime(delta: 15)
+    }
+    
+ 
+    
+    
+    
+    
+    
+    @IBOutlet weak var miniPlayerView: UIView!
+    
+    
+    @IBOutlet weak var maximizedStackView: UIStackView!
+    
     
     @IBAction func handleCurrentTimeSliderChange(_ sender: Any) {
         print("It shows", currentTimeSlider.value)
@@ -192,10 +230,13 @@ class PlayerDetailsView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseButton.setImage(UIImage(named: "pause"), for: .normal)
+            miniPlayPauseButton.setImage(UIImage(named: "pause"), for: .normal)
             self.enlargeEpisodeImageView()
         } else {
             player.pause()
             playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+            miniPlayPauseButton.setImage(UIImage(named: "play"), for: .normal)
+
             self.shrinkEpisodeImageView()
 
         }
