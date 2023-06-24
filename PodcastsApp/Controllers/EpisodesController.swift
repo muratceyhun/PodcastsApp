@@ -71,20 +71,21 @@ class EpisodeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let window = UIApplication.shared.connectedScenes
+        let episode = self.episodes[indexPath.row]
+
+        let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
                 .compactMap({$0 as? UIWindowScene})
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
-        
-//        let window = UIApplication.shared.keyWindow
-        
-        let playerDetailView = PlayerDetailsView.initFromNib()
-        let episode = self.episodes[indexPath.row]
-        playerDetailView.frame = self.view.frame
-        playerDetailView.episode = episode
-        window?.addSubview(playerDetailView)
+        let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
+        mainTabBarController?.maximizePlayerDetails(episode: episode)
+
+//        
+//        let playerDetailView = PlayerDetailsView.initFromNib()
+//        playerDetailView.frame = self.view.frame
+//        playerDetailView.episode = episode
+//        window?.addSubview(playerDetailView)
          
     }
     
