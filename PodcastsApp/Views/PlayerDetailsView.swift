@@ -69,6 +69,7 @@ class PlayerDetailsView: UIView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
         
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
         observePlayerCurrentTime()
         
         let time = CMTimeMake(value: 1, timescale: 3)
@@ -77,6 +78,26 @@ class PlayerDetailsView: UIView {
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("EPİSODE STARTED PLAYING ")
             self?.enlargeEpisodeImageView()
+        }
+    }
+    
+    @objc func handlePan(gesture: UIPanGestureRecognizer) {
+         print("Pannig right now...")
+        
+        if gesture.state == .began {
+        } else if gesture.state == .changed {
+            let trasform = gesture.translation(in: self.superview)
+            self.transform = CGAffineTransform(translationX: 0, y: trasform.y)
+            self.miniPlayerView.alpha = 1 + trasform.y / 300
+            self.maximizedStackView.alpha = -trasform.y / 300
+            print(trasform.y)
+        } else if gesture.state == .ended {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
+                self.transform = .identity
+                self.miniPlayerView.alpha = 1
+                self.maximizedStackView.alpha = 0
+            }
+            
         }
     }
     
