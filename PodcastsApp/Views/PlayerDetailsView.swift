@@ -43,7 +43,7 @@ class PlayerDetailsView: UIView {
     fileprivate func observePlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
-         
+            
             self?.currentTimeLabel.text = time.toDisplayString()
             
             let durationTime = self?.player.currentItem?.duration
@@ -61,20 +61,20 @@ class PlayerDetailsView: UIView {
     }
     
     
-    
+    var panGesture: UIPanGestureRecognizer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
-        
-        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        addGestureRecognizer(panGesture)
         observePlayerCurrentTime()
         
         let time = CMTimeMake(value: 1, timescale: 3)
         let times = [NSValue(time: time)]
-
+        
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             print("EPİSODE STARTED PLAYING ")
             self?.enlargeEpisodeImageView()
@@ -82,33 +82,51 @@ class PlayerDetailsView: UIView {
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
-         print("Pannig right now...")
-        
-        if gesture.state == .began {
-        } else if gesture.state == .changed {
-            let trasform = gesture.translation(in: self.superview)
-            self.transform = CGAffineTransform(translationX: 0, y: trasform.y)
-            self.miniPlayerView.alpha = 1 + trasform.y / 300
-            self.maximizedStackView.alpha = -trasform.y / 300
-            print(trasform.y)
+        if gesture.state == .changed {
+            handlePanChanged(gesture: gesture)
         } else if gesture.state == .ended {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
-                self.transform = .identity
+            handlePanEnded(gesture: gesture)
+        }
+    }
+    
+    func handlePanChanged(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self.superview)
+        self.transform = CGAffineTransform(translationX: 0, y: translation.y)
+        self.miniPlayerView.alpha = 1 + translation.y / 300
+        self.maximizedStackView.alpha = -translation.y / 300
+    }
+    
+    func handlePanEnded(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self.superview)
+        let velocity = gesture.velocity(in: self.superview)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
+            self.transform = .identity
+            
+            if translation.y < -300 || velocity.y < -500 {
+                let keyWindow = UIApplication.shared.connectedScenes
+                    .filter({$0.activationState == .foregroundActive})
+                    .compactMap({$0 as? UIWindowScene})
+                    .first?.windows
+                    .filter({$0.isKeyWindow}).first
+                let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
+                mainTabBarController?.maximizePlayerDetails(episode: nil)
+                gesture.isEnabled = false
+            } else {
                 self.miniPlayerView.alpha = 1
                 self.maximizedStackView.alpha = 0
             }
-            
         }
     }
     
     @objc func handleTapMaximize() {
         let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .compactMap({$0 as? UIWindowScene})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
         let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
         mainTabBarController?.maximizePlayerDetails(episode: nil)
+        panGesture.isEnabled = false
     }
     
     
@@ -131,7 +149,7 @@ class PlayerDetailsView: UIView {
             miniPlayPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
         }
     }
-        
+    
     @IBOutlet weak var miniFastForwardButton: UIButton! {
         didSet {
             miniFastForwardButton.addTarget(self, action: #selector(miniFastForward), for: .touchUpInside)
@@ -142,7 +160,7 @@ class PlayerDetailsView: UIView {
         seekToCurrentTime(delta: 15)
     }
     
- 
+    
     
     
     
@@ -185,7 +203,7 @@ class PlayerDetailsView: UIView {
         player.volume = sender.value
     }
     
-
+    
     @IBOutlet weak var currentTimeLabel: UILabel!
     
     @IBOutlet weak var durationLabel: UILabel!
@@ -196,15 +214,17 @@ class PlayerDetailsView: UIView {
     
     
     @IBAction func handleDismiss(_ sender: Any) {
-//        removeFromSuperview()
+        //        removeFromSuperview()
         
         let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .compactMap({$0 as? UIWindowScene})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
         let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
         mainTabBarController?.minimizePlayerDetails()
+        panGesture.isEnabled = true
+        
         
     }
     
@@ -246,7 +266,7 @@ class PlayerDetailsView: UIView {
     
     @objc func handlePlayPause() {
         
-//        player.timeControlStatus == .paused ? player.play() : player.pause()
+        //        player.timeControlStatus == .paused ? player.play() : player.pause()
         
         if player.timeControlStatus == .paused {
             player.play()
@@ -257,12 +277,12 @@ class PlayerDetailsView: UIView {
             player.pause()
             playPauseButton.setImage(UIImage(named: "play"), for: .normal)
             miniPlayPauseButton.setImage(UIImage(named: "play"), for: .normal)
-
+            
             self.shrinkEpisodeImageView()
-
+            
         }
     }
     
     
- 
+    
 }

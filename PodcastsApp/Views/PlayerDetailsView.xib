@@ -220,7 +220,11 @@
                                 </imageView>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="0z8-0O-e73" firstAttribute="top" secondItem="buW-fB-EEE" secondAttribute="top" constant="2" id="NiU-p7-5eg"/>
+                                <constraint firstItem="0z8-0O-e73" firstAttribute="leading" secondItem="Qji-m5-M9F" secondAttribute="trailing" constant="2" id="V7H-ZO-bmD"/>
                                 <constraint firstAttribute="height" constant="36" id="bvG-ej-gFy"/>
+                                <constraint firstItem="oUN-ue-t7e" firstAttribute="leading" secondItem="0z8-0O-e73" secondAttribute="trailing" constant="2" id="rQ9-kV-WkV"/>
+                                <constraint firstAttribute="bottom" secondItem="0z8-0O-e73" secondAttribute="bottom" constant="2" id="uxt-gO-UGS"/>
                             </constraints>
                         </stackView>
                     </subviews>
