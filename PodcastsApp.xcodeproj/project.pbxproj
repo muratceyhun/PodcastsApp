@@ -25,6 +25,7 @@
 		4320ED532A390BA40053A9E9 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED522A390BA40053A9E9 /* Episode.swift */; };
 		4320ED562A3910BF0053A9E9 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4320ED542A3910BF0053A9E9 /* EpisodeCell.swift */; };
 		4320ED572A3910BF0053A9E9 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */; };
+		434DA8022A4B81C600B5DF68 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434DA8012A4B81C600B5DF68 /* UIApplication.swift */; };
 		4374EA062A424E5700EE22FB /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4374EA052A424E5700EE22FB /* CMTime.swift */; };
 		43D2C3802A3A6F3500D75204 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C37F2A3A6F3500D75204 /* String.swift */; };
 		43D2C3822A3B5F0400D75204 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D2C3812A3B5F0400D75204 /* RSSFeed.swift */; };
@@ -50,6 +51,7 @@
 		4320ED522A390BA40053A9E9 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		4320ED542A3910BF0053A9E9 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		4320ED552A3910BF0053A9E9 /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
+		434DA8012A4B81C600B5DF68 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		4374EA052A424E5700EE22FB /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		43D2C37F2A3A6F3500D75204 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		43D2C3812A3B5F0400D75204 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				43D2C37F2A3A6F3500D75204 /* String.swift */,
 				43D2C3812A3B5F0400D75204 /* RSSFeed.swift */,
 				4374EA052A424E5700EE22FB /* CMTime.swift */,
+				434DA8012A4B81C600B5DF68 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				434DA8022A4B81C600B5DF68 /* UIApplication.swift in Sources */,
 				4316134C2A2F945B00457E1E /* ViewController.swift in Sources */,
 				4320ED422A33A5950053A9E9 /* APIService.swift in Sources */,
 				4320ED492A35F6690053A9E9 /* PodcastCell.swift in Sources */,

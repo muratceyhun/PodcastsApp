@@ -63,13 +63,17 @@ class PlayerDetailsView: UIView {
     
     var panGesture: UIPanGestureRecognizer!
     
+    fileprivate func setupGestures() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        miniPlayerView.addGestureRecognizer(panGesture)
+        maximizedStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissalPan)))
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        addGestureRecognizer(panGesture)
+        setupGestures()
         observePlayerCurrentTime()
         
         let time = CMTimeMake(value: 1, timescale: 3)
@@ -79,6 +83,35 @@ class PlayerDetailsView: UIView {
             print("EPİSODE STARTED PLAYING ")
             self?.enlargeEpisodeImageView()
         }
+    }
+    
+    @objc func handleDismissalPan(gesture: UIPanGestureRecognizer) {
+        if gesture.state == .changed {
+            let translation = gesture.translation(in: self.superview)
+            print(translation.y)
+            maximizedStackView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+        } else if gesture.state == .ended {
+            let translation = gesture.translation(in: self.superview)
+            if translation.y < 300 {
+                print(translation.y)
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
+                    self.maximizedStackView.transform = .identity
+                }
+            } else {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
+                    let keyWindow = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .compactMap({$0 as? UIWindowScene})
+                        .first?.windows
+                        .filter({$0.isKeyWindow}).first
+                    let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
+                    mainTabBarController?.minimizePlayerDetails()
+                }
+            }
+           
+            
+        }
+        
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
@@ -103,14 +136,9 @@ class PlayerDetailsView: UIView {
             self.transform = .identity
             
             if translation.y < -300 || velocity.y < -500 {
-                let keyWindow = UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == .foregroundActive})
-                    .compactMap({$0 as? UIWindowScene})
-                    .first?.windows
-                    .filter({$0.isKeyWindow}).first
-                let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
-                mainTabBarController?.maximizePlayerDetails(episode: nil)
-                gesture.isEnabled = false
+                
+                UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: nil)
+                
             } else {
                 self.miniPlayerView.alpha = 1
                 self.maximizedStackView.alpha = 0
@@ -119,14 +147,7 @@ class PlayerDetailsView: UIView {
     }
     
     @objc func handleTapMaximize() {
-        let keyWindow = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .compactMap({$0 as? UIWindowScene})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first
-        let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
-        mainTabBarController?.maximizePlayerDetails(episode: nil)
-        panGesture.isEnabled = false
+        UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: nil)
     }
     
     
@@ -223,9 +244,6 @@ class PlayerDetailsView: UIView {
             .filter({$0.isKeyWindow}).first
         let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
         mainTabBarController?.minimizePlayerDetails()
-        panGesture.isEnabled = true
-        
-        
     }
     
     
