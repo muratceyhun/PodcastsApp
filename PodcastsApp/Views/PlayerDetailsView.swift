@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import MediaPlayer
 
 class PlayerDetailsView: UIView {
     
@@ -70,9 +71,30 @@ class PlayerDetailsView: UIView {
         maximizedStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissalPan)))
     }
     
+    
+    fileprivate func setupAudioSession() {
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let sessionError {
+            print("ERROR:", sessionError)
+        }
+    }
+    
+    fileprivate func setupRemoteControl() {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        MPRemoteCommandCenter.shared().playCommand.addTarget { _  in
+            print("MURATTTTTT")
+            return .success
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setupRemoteControl()
+        setupAudioSession()
         setupGestures()
         observePlayerCurrentTime()
         
