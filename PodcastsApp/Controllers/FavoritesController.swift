@@ -19,8 +19,7 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     fileprivate func setupCollectionView() {
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView.backgroundColor = .red
+        collectionView.register(FavoritePodcastCell.self, forCellWithReuseIdentifier: cellID)
     }
     
     
@@ -32,14 +31,13 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .yellow
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width - 3*16) / 2
-        return .init(width: width , height: width)
+        return .init(width: width , height: width + 46)
     }
     
     
