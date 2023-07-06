@@ -27,8 +27,45 @@ class EpisodeController: UITableViewController {
         super.viewDidLoad()
         //        tableView.register(EpisodeCell.self, forCellReuseIdentifier: cellID)
         tableView.register(UINib(nibName: "EpisodeCell", bundle: nil), forCellReuseIdentifier: cellID)
+        setupNavBarButton()
+    }
+    
+    fileprivate func setupNavBarButton() {
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(handleSaveFavorite)),
+            UIBarButtonItem(title: "Fetch", style: .plain, target: self, action: #selector(handleFetch))
+        ]
+    }
+    
+    let favPodcastKey = "podcastKey"
+    
+    
+    @objc func handleFetch() {
+        print("FETCH")
+        let value = UserDefaults.standard.value(forKey: favPodcastKey) as? String
+        print(value ?? "")
         
-        episodes = [Episode]()
+        guard let data = UserDefaults.standard.data(forKey: favPodcastKey) else {return}
+        
+        do {
+            let podcast = try NSKeyedUnarchiver.unarchivedObject(ofClass: Podcast.self, from: data)
+            print("---------")
+            print(podcast?.trackName ?? "", "|", podcast?.artistName ?? "")
+        } catch let err {
+            print("ERROR:", err)
+        }
+    }
+    
+    @objc func handleSaveFavorite() {
+      print("FAV")
+        guard let podcast = podcasts else {return}
+        
+        do {
+           let data = try NSKeyedArchiver.archivedData(withRootObject: podcast, requiringSecureCoding: false)
+            UserDefaults.standard.set(data, forKey: favPodcastKey)
+        } catch let getFavError {
+            print("ERROR:", getFavError)
+        }
     }
     
     fileprivate func fetchEpisodes() {
@@ -40,8 +77,7 @@ class EpisodeController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-
-            }
+    }
     
     
     //MARK: - TableViewSetup
@@ -72,21 +108,21 @@ class EpisodeController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let episode = self.episodes[indexPath.row]
-
+        
         let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .compactMap({$0 as? UIWindowScene})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
         let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
         mainTabBarController?.maximizePlayerDetails(episode: episode)
-
-//        
-//        let playerDetailView = PlayerDetailsView.initFromNib()
-//        playerDetailView.frame = self.view.frame
-//        playerDetailView.episode = episode
-//        window?.addSubview(playerDetailView)
-         
+        
+        //
+        //        let playerDetailView = PlayerDetailsView.initFromNib()
+        //        playerDetailView.frame = self.view.frame
+        //        playerDetailView.episode = episode
+        //        window?.addSubview(playerDetailView)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

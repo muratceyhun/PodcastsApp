@@ -88,8 +88,8 @@ class MainTabBarController: UITabBarController {
         
         let layout = UICollectionViewFlowLayout()
         let favoritesController = FavoritesController(collectionViewLayout: layout)
-        viewControllers = [
-            generateNavController(with: favoritesController, title: "Favorites", imageName: "favorites"), generateNavController(with: PodcastsSearchController(), title: "Search", imageName: "search"), generateNavController(with: ViewController(), title: "Downloads", imageName: "downloads")
+        viewControllers = [generateNavController(with: PodcastsSearchController(), title: "Search", imageName: "search"),
+            generateNavController(with: favoritesController, title: "Favorites", imageName: "favorites"),  generateNavController(with: ViewController(), title: "Downloads", imageName: "downloads")
         ]
     }
     
