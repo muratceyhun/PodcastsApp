@@ -28,10 +28,22 @@ class EpisodeController: UITableViewController {
     }
     
     fileprivate func setupNavBarButton() {
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(handleSaveFavorite)),
-            UIBarButtonItem(title: "Fetch", style: .plain, target: self, action: #selector(handleFetch))
-        ]
+        
+        let savedPodcasts = UserDefaults.standard.savedPodcasts()
+        
+        let hasFavorited = savedPodcasts.firstIndex(where: { $0.trackName == self.podcasts?.trackName && $0.artistName == self.podcasts?.artistName && $0.artworkUrl100 == self.podcasts?.artworkUrl100
+        }) != nil
+        
+        if hasFavorited {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: nil)
+        } else {
+            navigationItem.rightBarButtonItems = [
+                UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(handleSaveFavorite)),
+//                UIBarButtonItem(title: "Fetch", style: .plain, target: self, action: #selector(handleFetch))
+            ]
+            
+        }
+   
     }
     
     let favPodcastKey = "podcastKey"
@@ -54,18 +66,7 @@ class EpisodeController: UITableViewController {
     
     @objc func handleSaveFavorite() {
         guard let podcast = podcasts else {return}
-        
-        // Fetch our saved Podcasts first
-        
-//        guard let savedPodcastsData = UserDefaults.standard.data(forKey: favPodcastKey) else {return}
-//        var listDummy = [Podcast]()
-//        do {
-//            let savedPodcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPodcastsData) as? [Podcast]
-//            guard let savePodcast = savedPodcasts else {return}
-//            listDummy = savePodcast
-//        } catch let err2 {
-//            print("ERROR", err2)
-//        }
+
         let favPodcasts = UserDefaults.standard.savedPodcasts()
         var listOfPodcast = favPodcasts
         listOfPodcast.append(podcast)
@@ -76,6 +77,14 @@ class EpisodeController: UITableViewController {
         } catch let getFavError {
             print("ERROR:", getFavError)
         }
+        
+        showBadgeHighlight()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: nil)
+    }
+    
+    fileprivate func showBadgeHighlight() {
+        UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = "New  "
     }
     
     fileprivate func fetchEpisodes() {

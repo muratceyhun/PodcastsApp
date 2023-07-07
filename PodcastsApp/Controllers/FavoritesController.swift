@@ -20,19 +20,38 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favoritePodcasts = UserDefaults.standard.savedPodcasts()
+        collectionView.reloadData()
+        UIApplication.mainTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = nil
+    }
+    
     fileprivate func setupCollectionView() {
         collectionView.register(FavoritePodcastCell.self, forCellWithReuseIdentifier: cellID)
         
-        
-//        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-//        
-//        
-//        collectionView.addGestureRecognizer(gesture)
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        collectionView.addGestureRecognizer(gesture)
     }
     
-//    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
-//        print("LONGGG PRESSEDDDDD.....")
-//    }
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        print("-------")
+        
+        let location = gesture.location(in: collectionView)
+        guard let selectedIndexPath = collectionView.indexPathForItem(at: location) else {return}
+        print(selectedIndexPath)
+        
+        let alertController = UIAlertController(title: "Remove Podcast? ", message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "YES", style: .destructive, handler: { _ in
+            self.favoritePodcasts.remove(at: selectedIndexPath.item)
+            self.collectionView.deleteItems(at: [selectedIndexPath])
+        }))
+        alertController.addAction(UIAlertAction(title: "CANCEL", style: .default))
+        present(alertController, animated: true)
+    }
+    
+  
     
     
     //MARK: - UICollectionView Delegate and Spacing Methods.
@@ -45,6 +64,16 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! FavoritePodcastCell
         cell.podcasts = favoritePodcasts[indexPath.item]
         return cell
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let episodesController = EpisodeController()
+        episodesController.podcasts = self.favoritePodcasts[indexPath.item]
+        navigationController?.pushViewController(episodesController, animated: true)
+        
     }
     
     

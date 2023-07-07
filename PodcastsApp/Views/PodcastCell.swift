@@ -22,6 +22,7 @@ class PodcastCell: UITableViewCell {
             artistNameLabel.text = podcast.artistName
             episodeCountLabel.text = "\(podcast.trackCount ?? .zero) Episodes"
             podcastImageView.sd_setImage(with: URL(string: podcast.artworkUrl100 ?? ""))
+            podcastImageView.clipsToBounds = true
         }
     }
     
