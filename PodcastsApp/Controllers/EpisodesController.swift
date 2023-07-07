@@ -10,10 +10,7 @@ import FeedKit
 
 class EpisodeController: UITableViewController {
     
-    
     var episodes = [Episode]()
-    
-    
     
     fileprivate let cellID = "cellID"
     
@@ -41,27 +38,40 @@ class EpisodeController: UITableViewController {
     
     
     @objc func handleFetch() {
-        print("FETCH")
-        let value = UserDefaults.standard.value(forKey: favPodcastKey) as? String
-        print(value ?? "")
         
         guard let data = UserDefaults.standard.data(forKey: favPodcastKey) else {return}
-        
+    
         do {
-            let podcast = try NSKeyedUnarchiver.unarchivedObject(ofClass: Podcast.self, from: data)
-            print("---------")
-            print(podcast?.trackName ?? "", "|", podcast?.artistName ?? "")
-        } catch let err {
-            print("ERROR:", err)
+            let savedPodcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Podcast]
+            savedPodcasts?.forEach({ p in
+                print(p.trackName ?? "", "|", p.artistName ?? "")
+            })
+            
+        } catch let err1 {
+            print("ERROR:", err1)
         }
     }
     
     @objc func handleSaveFavorite() {
-      print("FAV")
         guard let podcast = podcasts else {return}
         
+        // Fetch our saved Podcasts first
+        
+//        guard let savedPodcastsData = UserDefaults.standard.data(forKey: favPodcastKey) else {return}
+//        var listDummy = [Podcast]()
+//        do {
+//            let savedPodcasts = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPodcastsData) as? [Podcast]
+//            guard let savePodcast = savedPodcasts else {return}
+//            listDummy = savePodcast
+//        } catch let err2 {
+//            print("ERROR", err2)
+//        }
+        let favPodcasts = UserDefaults.standard.savedPodcasts()
+        var listOfPodcast = favPodcasts
+        listOfPodcast.append(podcast)
+//         Transform podcast into data...
         do {
-           let data = try NSKeyedArchiver.archivedData(withRootObject: podcast, requiringSecureCoding: false)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcast, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: favPodcastKey)
         } catch let getFavError {
             print("ERROR:", getFavError)
@@ -116,13 +126,7 @@ class EpisodeController: UITableViewController {
             .filter({$0.isKeyWindow}).first
         let mainTabBarController = keyWindow?.rootViewController as? MainTabBarController
         mainTabBarController?.maximizePlayerDetails(episode: episode)
-        
-        //
-        //        let playerDetailView = PlayerDetailsView.initFromNib()
-        //        playerDetailView.frame = self.view.frame
-        //        playerDetailView.episode = episode
-        //        window?.addSubview(playerDetailView)
-        
+
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

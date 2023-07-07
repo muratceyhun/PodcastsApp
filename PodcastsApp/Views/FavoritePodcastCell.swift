@@ -10,6 +10,17 @@ import UIKit
 
 class FavoritePodcastCell: UICollectionViewCell {
     
+    
+    var podcasts: Podcast! {
+        didSet {
+            nameLabel.text = podcasts?.trackName
+            artistNameLabel.text = podcasts?.artistName
+            imageView.sd_setImage(with: URL(string: podcasts?.artworkUrl100 ?? ""))
+            imageView.layer.cornerRadius = 16
+            imageView.clipsToBounds = true
+        }
+    }
+    
     let imageView = UIImageView(image: UIImage(named: "appicon"))
     let nameLabel = UILabel()
     let artistNameLabel = UILabel()

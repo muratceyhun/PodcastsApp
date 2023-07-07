@@ -11,26 +11,39 @@ class FavoritesController: UICollectionViewController, UICollectionViewDelegateF
     
     fileprivate let cellID = "cellID"
     
+    
+    var favoritePodcasts = UserDefaults.standard.savedPodcasts()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        
         
     }
     
     fileprivate func setupCollectionView() {
         collectionView.register(FavoritePodcastCell.self, forCellWithReuseIdentifier: cellID)
+        
+        
+//        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+//        
+//        
+//        collectionView.addGestureRecognizer(gesture)
     }
+    
+//    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+//        print("LONGGG PRESSEDDDDD.....")
+//    }
     
     
     //MARK: - UICollectionView Delegate and Spacing Methods.
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return favoritePodcasts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! FavoritePodcastCell
+        cell.podcasts = favoritePodcasts[indexPath.item]
         return cell
     }
     

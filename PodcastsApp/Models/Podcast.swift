@@ -16,7 +16,6 @@ class Podcast: NSObject, Decodable, NSCoding, NSSecureCoding {
     
     func encode(with coder: NSCoder) {
         
-        print("Trying to transform the Podcast into data")
         coder.encode(trackName ?? "", forKey: "trackName")
         coder.encode(artistName ?? "", forKey: "artistName")
         coder.encode(artworkUrl100 ?? "", forKey: "artworkUrl100")
@@ -24,7 +23,6 @@ class Podcast: NSObject, Decodable, NSCoding, NSSecureCoding {
     }
     
     required init?(coder: NSCoder) {
-        print("Trying to turn data into the Podcast")
         
         self.trackName = coder.decodeObject(forKey: "trackName") as? String
         self.artistName = coder.decodeObject(forKey: "artistName") as? String
