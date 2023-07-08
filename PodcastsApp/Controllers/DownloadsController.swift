@@ -52,6 +52,7 @@ class DownloadsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.item]
+         
         UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode)
         tableView.deselectRow(at: indexPath, animated: true)
     }

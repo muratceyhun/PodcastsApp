@@ -34,6 +34,7 @@ class EpisodeController: UITableViewController {
         let hasFavorited = savedPodcasts.firstIndex(where: { $0.trackName == self.podcasts?.trackName && $0.artistName == self.podcasts?.artistName && $0.artworkUrl100 == self.podcasts?.artworkUrl100
         }) != nil
         
+        
         if hasFavorited {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: nil)
         } else {
@@ -106,9 +107,12 @@ class EpisodeController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let context = UIContextualAction(style: .normal, title: "Download") { _, _, _ in
             UIApplication.mainTabBarController()?.viewControllers?[2].tabBarItem.badgeValue = "NEW"
-            print("Downloading...")
             let episode = self.episodes[indexPath.item]
             UserDefaults.standard.downloadEpisode(episode: episode )
+            
+            // download the episode using Alamofire libr.
+            
+            APIService.shared.downloadEpisodes(episode: episode)
         }
         let swipeAction = UISwipeActionsConfiguration(actions: [context])
         return swipeAction
