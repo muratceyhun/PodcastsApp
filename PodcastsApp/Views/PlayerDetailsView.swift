@@ -25,12 +25,44 @@ class PlayerDetailsView: UIView {
     }
     
     fileprivate func playEpisode() {
-        print("Trying to play episode at url:", episode.streamUrl ?? "")
         
-        guard let url = URL(string: episode.streamUrl ?? "") else {return}
-        let playerItem = AVPlayerItem(url: url)
+        if episode.fileUrl != nil {
+            playEpisodewithFileURL()
+        } else {
+            print("Trying to play episode at url:", episode.streamUrl ?? "")
+            
+            guard let url = URL(string: episode.streamUrl ?? "") else {return}
+            let playerItem = AVPlayerItem(url: url)
+            player.replaceCurrentItem(with: playerItem)
+            player.play()
+        }
+        
+    }
+    
+    fileprivate func playEpisodewithFileURL() {
+        
+        
+        guard var trueLocation = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return}
+        print("-------")
+        print(trueLocation.absoluteString)
+        print("-------")
+        
+        guard let fileUrl = URL(string: episode.fileUrl ?? "") else {return}
+        let fileName = fileUrl.lastPathComponent
+        
+        trueLocation.append(path: fileName)
+        
+        print("TRUE LOCATION:", trueLocation)
+        
+
+        
+        print("Trying to play episode at fileUrl:", episode.fileUrl ?? "")
+//            guard let url = URL(string: episode.fileUrl ?? "") else {return}
+        let playerItem = AVPlayerItem(url: trueLocation)
         player.replaceCurrentItem(with: playerItem)
         player.play()
+
+        
     }
     
     

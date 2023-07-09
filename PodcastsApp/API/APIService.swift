@@ -27,7 +27,7 @@ class APIService {
             guard let index = indexDummy else {return }
             downloadedEpisodes[index].fileUrl = resp.fileURL?.absoluteString
             
-            
+
             do {
                 let data = try JSONEncoder().encode(downloadedEpisodes)
                 UserDefaults.standard.set(data, forKey: UserDefaults.downloadKey)

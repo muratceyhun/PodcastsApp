@@ -52,9 +52,24 @@ class DownloadsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.item]
+        
+        if episode.fileUrl != nil {
+            UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode)
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            let alertController = UIAlertController(title: "Fileurl not found", message: "Use your streamURL instead ?", preferredStyle: .actionSheet)
+            
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+            
+            present(alertController, animated: true)
+        
+        }
          
-        UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode)
-        tableView.deselectRow(at: indexPath, animated: true)
+       
     }
     
     
