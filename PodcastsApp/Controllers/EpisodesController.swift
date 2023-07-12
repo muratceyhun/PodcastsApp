@@ -27,6 +27,8 @@ class EpisodeController: UITableViewController {
         setupNavBarButton()
     }
     
+
+    
     fileprivate func setupNavBarButton() {
         
         let savedPodcasts = UserDefaults.standard.savedPodcasts()

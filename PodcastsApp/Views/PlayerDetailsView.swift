@@ -19,8 +19,6 @@ class PlayerDetailsView: UIView {
             titleLabel.text = episode.title
             authorLabel.text = episode.author
             playEpisode()
-            
-            
         }
     }
     

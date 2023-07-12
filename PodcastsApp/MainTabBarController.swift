@@ -15,7 +15,6 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
         setupPlayerDetailsView()
         
-        
     }
     
     @objc func minimizePlayerDetails() {
@@ -47,8 +46,6 @@ class MainTabBarController: UITabBarController {
             self.tabBar.isHidden = true
             self.playerDetailsView.maximizedStackView.alpha = 1
             self.playerDetailsView.miniPlayerView.alpha = 0
-            
-            
         }
     }
     

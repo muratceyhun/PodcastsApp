@@ -51,19 +51,30 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgE-Xr-4LC">
+                        <rect key="frame" x="33.333333333333336" y="94" width="65.666666666666657" height="32.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <size key="shadowOffset" width="0.0" height="1"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="9FP-Ny-lOX" firstAttribute="leading" secondItem="zyi-m8-UX1" secondAttribute="trailing" constant="16" id="36U-g5-VTO"/>
                     <constraint firstItem="zyi-m8-UX1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Doc-TK-Gya"/>
                     <constraint firstItem="zyi-m8-UX1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EBO-IT-qc2"/>
                     <constraint firstItem="9FP-Ny-lOX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="c17-7S-iSl"/>
+                    <constraint firstItem="fgE-Xr-4LC" firstAttribute="centerX" secondItem="zyi-m8-UX1" secondAttribute="centerX" id="dKw-TC-BLt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9FP-Ny-lOX" secondAttribute="trailing" constant="16" id="gm6-BO-dJo"/>
+                    <constraint firstItem="fgE-Xr-4LC" firstAttribute="centerY" secondItem="zyi-m8-UX1" secondAttribute="centerY" id="kIX-cG-e7r"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="51c-6f-HLr" id="wAF-OP-fKp"/>
                 <outlet property="episodeImageView" destination="zyi-m8-UX1" id="YqK-fi-puN"/>
+                <outlet property="progressLabel" destination="fgE-Xr-4LC" id="WMY-ve-1do"/>
                 <outlet property="pubDateLabel" destination="XM3-K2-Byl" id="dht-MD-Fb7"/>
                 <outlet property="titleLabel" destination="s3K-Av-cHn" id="iDM-7W-ctP"/>
             </connections>
